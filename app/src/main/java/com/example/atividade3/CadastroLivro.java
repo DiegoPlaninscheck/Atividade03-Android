@@ -3,8 +3,10 @@ package com.example.atividade3;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,13 +47,14 @@ public class CadastroLivro extends AppCompatActivity {
     }
 
     private void cadastrarLivro() {
-        System.out.println("funcao add livro");
-        Livro livro = new Livro(Integer.parseInt(isbn.getText().toString()), nome.getText().toString(), sinopse.getText().toString(), editora.getText().toString(), ano.getText().toString(), ano.getText().toString());
-        System.out.println(livro.toString());
-        ArrayList<Livro> lista = MainActivity.lista;
-        lista.add(livro);
-//        MainActivity.atualizarLista(lista);
-//        System.out.println(MainActivity.lista.toString());
+        Livro livro = new Livro(Integer.parseInt(isbn.getText().toString()), nome.getText().toString(), sinopse.getText().toString(), editora.getText().toString(), ano.getText().toString());
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("isbn", livro.getIsbn().toString());
+        intent.putExtra("nome", livro.getNome());
+        intent.putExtra("sinopse", livro.getSinopse());
+        intent.putExtra("editora", livro.getEditora());
+        intent.putExtra("ano", livro.getAno());
+        startActivity(intent);
     }
 
     private void voltar() {

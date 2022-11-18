@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("criou");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -33,15 +32,26 @@ public class MainActivity extends AppCompatActivity {
         setListagemInfo();
         setAdapter();
 
-        System.out.println(lista.toString());
+        Intent intent = getIntent();
+
+        String livroIsbn = intent.getStringExtra("isbn");
+        String livroNome = intent.getStringExtra("nome");
+        String livroSinopse = intent.getStringExtra("sinopse");
+        String livroEditora = intent.getStringExtra("editora");
+        String livroAno = intent.getStringExtra("ano");
+
+        if (livroIsbn != null && livroNome != null && livroSinopse != null && livroEditora != null && livroAno != null) {
+            Livro livro = new Livro(Integer.parseInt(livroIsbn), livroNome, livroSinopse, livroEditora, livroAno);
+            lista.add(livro);
+        }
 
         botaoAdd.setOnClickListener(v -> telaAddLivro());
-        System.out.println("fim criou");
     }
 
     private void telaAddLivro() {
         System.out.println("tela add livro");
         Intent intent = new Intent(this, CadastroLivro.class);
+        intent.putExtra("lista", lista);
         startActivity(intent);
     }
 
@@ -52,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
     }
-
-//    public static void atualizarLista(ArrayList<Livro> novaLista){
-//        lista = novaLista;
-//    }
 
     private void setListagemInfo() {
         lista.add(new Livro(123, "Livro 1", "Sinopse", "Editora", "2022", "foto"));

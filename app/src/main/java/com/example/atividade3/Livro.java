@@ -1,7 +1,12 @@
 package com.example.atividade3;
 
 
-public class Livro {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Livro implements Parcelable {
     private Integer isbn;
     private String nome, sinopse, editora, ano, foto;
 
@@ -21,6 +26,31 @@ public class Livro {
         this.editora = editora;
         this.ano = ano;
     }
+
+    protected Livro(Parcel in) {
+        if (in.readByte() == 0) {
+            isbn = null;
+        } else {
+            isbn = in.readInt();
+        }
+        nome = in.readString();
+        sinopse = in.readString();
+        editora = in.readString();
+        ano = in.readString();
+        foto = in.readString();
+    }
+
+    public static final Creator<Livro> CREATOR = new Creator<Livro>() {
+        @Override
+        public Livro createFromParcel(Parcel in) {
+            return new Livro(in);
+        }
+
+        @Override
+        public Livro[] newArray(int size) {
+            return new Livro[size];
+        }
+    };
 
     @Override
     public String toString() {
@@ -80,5 +110,25 @@ public class Livro {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (isbn == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(isbn);
+        }
+        dest.writeString(nome);
+        dest.writeString(sinopse);
+        dest.writeString(editora);
+        dest.writeString(ano);
+        dest.writeString(foto);
     }
 }
