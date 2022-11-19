@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyViewHolder> {
 
     private ArrayList<Livro> lista;
+    private Holder holder;
 
     public recyclerAdapter(ArrayList<Livro> lista) {
         this.lista = lista;
@@ -23,12 +24,14 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
         private ImageView foto;
         private ImageView excluirItem;
         private TextView nomeLivro;
+        private View item;
 
         public MyViewHolder(final View view) {
             super(view);
             foto = view.findViewById(R.id.foto);
             excluirItem = view.findViewById(R.id.iconeExcluir);
             nomeLivro = view.findViewById(R.id.nomeLivro);
+            item = view.findViewById(R.id.item);
         }
     }
 
@@ -41,8 +44,19 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String nome = lista.get(position).getNome();
-        holder.nomeLivro.setText(nome);
+        Holder myHolder = (Holder) holder;
+//        String nome = lista.get(position).getNome();
+//        holder.nomeLivro.setText(nome);
+
+//        myHolder.getImagem().setImageResource(lista.get(position).getFoto());
+        myHolder.getNomeLivro().setText(lista.get(position).getNome());
+
+        myHolder.getItem().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

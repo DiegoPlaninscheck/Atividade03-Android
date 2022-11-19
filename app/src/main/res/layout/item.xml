@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/item"
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginTop="24dp"
@@ -23,8 +23,8 @@
         android:layout_marginStart="24dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/item"
+        app:layout_constraintTop_toTopOf="@+id/item"
         app:layout_constraintVertical_bias="0.38"
         app:srcCompat="@drawable/livros" />
 
@@ -33,9 +33,9 @@
         android:layout_width="31dp"
         android:layout_height="38dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/item"
+        app:layout_constraintEnd_toEndOf="@+id/item"
+        app:layout_constraintTop_toTopOf="@+id/item"
         app:srcCompat="@drawable/cruz" />
 
     <TextView
@@ -45,8 +45,8 @@
         android:layout_marginStart="24dp"
         android:textColor="@color/white"
         android:text="Livro"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/item"
         app:layout_constraintStart_toEndOf="@+id/foto"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintTop_toTopOf="@+id/item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
